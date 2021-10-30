@@ -21,7 +21,7 @@ if ($conn -> connect_error)
 else
 {
     // ahora vamos a construir la consulta.
-    $sql = "SELECT * FROM persona"; // Preparar la consulta
+    $sql = "SELECT * FROM asignatura"; // Preparar la consulta
     $result = $conn -> query($sql);   // ejecutar la consulta
     // verificar si devuelve  datos o no.
     if ($result -> num_rows > 0)
