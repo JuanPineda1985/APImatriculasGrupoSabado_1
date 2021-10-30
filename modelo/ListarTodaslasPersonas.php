@@ -21,7 +21,24 @@ if ($conn -> connect_error)
 else
 {
     // ahora vamos a construir la consulta.
-    $sql = "SELECT * FROM persona";
-    $result = $conn->query($sql);   
+    $sql = "SELECT * FROM persona"; // Preparar la consulta
+    $result = $conn->query($sql);   // ejecutar la consulta
+    // verificar si devuelve  datos o no.
+    if ($result -> numn_rows > 0)
+    {
+        // Con los registtross encontrados los llevamos a un arreglo a un vector
+        while ($row[] = $result->fetch_assoc())
+        {
+            $item = $row;
+            // Ahora vamos a convertir el dato a Json
+            $json = json_encode($item);
+        }
+    }
+    else
+    {
+        echo "No hay registros para mostrar";
+    }
+    echo $json;
+    $conn-> close();
 }
 ?>
