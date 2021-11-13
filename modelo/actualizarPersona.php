@@ -31,13 +31,25 @@
     $telefono= $obj['telefono'];
     $tipo= $obj['tipo'];
 
-    // Ahora agregamos la instruccion para insertar
-    $sql_query = "INSERT into persona(nif, nombre, apellido1, apellido2, ciudad, clave, direccion, fecha_nacimiento, sexo, telefono, tipo) VALUES ('$nif', '$nombre', '$apellido1' ,'$apellido2' ,'$ciudad','$clave','$direccion','$fecha_nacimiento','$sexo','$telefono','$tipo')"
+    // Ahora agregamos la instruccion para Actualizar
+    $sql_query = "UPDATE persona SET
+    nif = '$nif', 
+    nombre = '$nombre', 
+    apellido1 = '$apellido1', 
+    apellido2 = '$apellido2', 
+    ciudad = '$ciudad', 
+    clave = '$clave', 
+    direccion = '$direccion', 
+    fecha_nacimiento = '$fecha_nacimiento', 
+    sexo = '$sexo', 
+    telefono = '$telefono', 
+    tipo = '$tipo' 
+    WHERE id = $id";
 
     //Ahora vamosa a Ejecutar la instruccion SQL anterior
     if(mysqli_query($conn, $sql_query))
     {
-        $mensaje = "Registrado";
+        $mensaje = "Actualizado";
         $json = json_encode($Mensaje);
         echo $json;
     }
