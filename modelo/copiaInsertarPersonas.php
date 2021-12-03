@@ -24,7 +24,7 @@
     $apellido1 = $obj['apellido1'];
     $apellido2 = $obj['apellido2'];
     $ciudad = $obj['ciudad'];
-    $clave= $obj['clave'];
+    $clave= $obj['Clave'];
     $direccion= $obj['direccion'];
     $fecha_nacimiento= $obj['fecha_nacimmiento'];
     $sexo= $obj['sexo'];
@@ -32,14 +32,20 @@
     $tipo= $obj['tipo'];
 
     // Ahora agregamos la instruccion para insertar
-    $sql_query = "DELETE into persona(nif, nombre, apellido1, apellido2, ciudad, clave, direccion, fecha_nacimiento, sexo, telefono, tipo) VALUES ('$nif', '$nombre', '$apellido1' ,'$apellido2' ,'$ciudad','$clave','$direccion','$fecha_nacimiento','$sexo','$telefono','$tipo')"
+    $sql_query = "INSERT into persona(nif, nombre, apellido1, apellido2, ciudad,
+     Clave, direccion, fecha_nacimiento,
+      sexo, telefono, tipo) 
+      VALUES ('$nif', '$nombre', '$apellido1' ,'$apellido2' ,'$ciudad',
+      '$clave','$direccion','$fecha_nacimiento','$sexo','$telefono','$tipo')";
+
+echo $sql_query;
 
     //Ahora vamosa a Ejecutar la instruccion SQL anterior
     if(mysqli_query($conn, $sql_query))
     {
-        $mensaje = "Borrado";
-        $json = json_encode($Mensaje);
-        echo $json;
+        $mensaje = "Registrado";
+        //$json = json_encode($Mensaje);
+        //echo $json;
     }
     else
     {

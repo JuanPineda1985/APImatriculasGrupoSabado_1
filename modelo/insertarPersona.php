@@ -1,51 +1,65 @@
 <?php
-    //Vamos a crear las instrucciones de codigo para grabar los datos en la tabla persona
-    header('Access-Control-Allow-Original: *');
-    header('Access-Control-Allow-Credentials: true');
-    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE');
-    header('Access-Control-Max-Age:1000');
-    header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token, Authorization');
+    //Vamos a crear las instrucciones de código para grabar datos en 
+    //la tabla persona.
 
-    // Ahora vamos a crear el metodo CONSULTAR para listar todos los registros
-    include '../Conexion/parametrosDB.php';
+  //Vamos a invocar las cabeceras para dar permisos
+    //de ejecución a los llamados de la API desde cualquier
+    //Aplicación.
+    header('Access-Control-Allow-Origin: *');
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token , Authorization');
+    //Ahora vamos a crear el método consultar para listas todos los registros.
+    include '../Conexion/ParametrosDB.php';
 
-    // Vamos a abrir la conexion
-    // Abrimos la conexion
+    //Vamos a abrir la conexión.
     $conn= mysqli_connect($HostName,$HostUser,$HostPass,$dataBaseName);
-    // Ahora validamos la conexion si es correcta o no
+    //Ahora validemos si la conexión es correcta o no.
     $json = file_get_contents('php://input');
-    //Decodificando los datos del formato json  EN LA VARIABLE  $obj
+
+    ////Decodificando los datos formato JSON en la variable $obj
     $obj = json_decode($json, true);
 
-    // vamos a crear las variables para enviar los datos de los campos de la tabla de la siguiente manera:
+    //Vamos a crear las variables para enviar los datos de los campos de la
+    //tabla de la siguiente manera:
+
     $id = $obj['id'];
     $nif = $obj['nif'];
     $nombre = $obj['nombre'];
     $apellido1 = $obj['apellido1'];
-    $apellido2 = $obj['apellido2'];
-    $ciudad = $obj['ciudad'];
-    $clave= $obj['clave'];
-    $direccion= $obj['direccion'];
-    $fecha_nacimiento= $obj['fecha_nacimmiento'];
-    $sexo= $obj['sexo'];
-    $telefono= $obj['telefono'];
-    $tipo= $obj['tipo'];
+    $apellido2 = $obj['apellido2'];   
+    $ciudad = $obj['ciudad']; 
+    $clave = $obj['clave']; 
+    $direccion = $obj['direccion']; 
+    $fecha_nacimiento = $obj['fecha_nacimiento']; 
+    $sexo = $obj['sexo'];
+    $telefono = $obj['telefono'];
+    $tipo = $obj['tipo'];  
+ 
 
-    // Ahora agregamos la instruccion para insertar
-    $sql_query = "INSERT into persona(nif, nombre, apellido1, apellido2, ciudad, clave, direccion, fecha_nacimiento, sexo, telefono, tipo) VALUES ('$nif', '$nombre', '$apellido1' ,'$apellido2' ,'$ciudad','$clave','$direccion','$fecha_nacimiento','$sexo','$telefono','$tipo')"
+     //Ahora agreguemos la instrucción SQL para insertar
+    $sql_query = "insert into persona(
+                nif, nombre, apellido1, apellido2, ciudad, 
+                Clave,  direccion, fecha_nacimiento, sexo, telefono, tipo)
+          values('$nif', '$nombre', '$apellido1', '$apellido2', 
+                '$ciudad', '$clave', '$direccion', '$fecha_nacimiento',
+                '$sexo', '$telefono', '$tipo')      
+    ";
 
-    //Ahora vamosa a Ejecutar la instruccion SQL anterior
-    if(mysqli_query($conn, $sql_query))
+
+
+    //Ahora vamos a ejecutar la instrucción SQL anterior
+    if(mysqli_query($conn,$sql_query))
     {
-        $mensaje = "Registrado";
+        $Mensaje = "GRABADO";
         $json = json_encode($Mensaje);
         echo $json;
     }
     else
     {
-        echo "Error"
+        echo "ERROR";
     }
-    //cerramos la conexion
+    //Cerremos la conexión
     mysqli_close($conn);
-
 ?>
